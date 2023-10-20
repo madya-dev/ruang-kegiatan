@@ -10,7 +10,7 @@ POSTMAN: https://www.postman.com/warped-crescent-303006/workspace/alterra/docume
 
 ## Entity Relational Diagram
 
-![erd](https://ik.imagekit.io/4z5kxs6yji8/ERD_Lx8kQXD-U.png?updatedAt=1697708741648)
+![erd](https://ik.imagekit.io/4z5kxs6yji8/diagram%20ERD%20ruang%20kegiatan_O6x2LfMJu.png?updatedAt=1697769737893)
 
 Link detail ERD: https://app.eraser.io/workspace/MQEr5jf4OiaaEfQjonwv
 
