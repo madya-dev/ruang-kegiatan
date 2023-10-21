@@ -39,13 +39,13 @@ jobs:
             docker stop ${{ secrets.CONTAINER_NAME }}
             docker rm ${{ secrets.CONTAINER_NAME }}
             docker rmi ${{ secrets.DOCKERHUB_USERNAME }}/ruang-kegiatan
-            docker run -d 
-                --name ${{ secrets.CONTAINER_NAME }} 
-                -p ${{ secrets.APP_PORT }}:${{ secrets.APP_PORT }}
-                -e DB_HOST=${{secrets.DB_HOST}}
-                -e DB_PORT=${{secrets.DB_PORT}}
-                -e DB_NAME=${{secrets.DB_NAME}}
-                -e DB_USERNAME=${{secrets.DB_USERNAME}}
-                -e DB_PASSWORD=${{secrets.DB_PASSWORD}}
-                -e JWT_SECRET=${{secrets.JWT_SECRET}}
+            docker run -d \
+                --name ${{ secrets.CONTAINER_NAME }} \
+                -p ${{ secrets.APP_PORT }}:${{ secrets.APP_PORT }} \
+                -e DB_HOST=${{secrets.DB_HOST}} \
+                -e DB_PORT=${{secrets.DB_PORT}} \
+                -e DB_NAME=${{secrets.DB_NAME}} \
+                -e DB_USERNAME=${{secrets.DB_USERNAME}} \
+                -e DB_PASSWORD=${{secrets.DB_PASSWORD}} \
+                -e JWT_SECRET=${{secrets.JWT_SECRET}} \
                 ${{ secrets.DOCKERHUB_USERNAME }}/ruang-kegiatan
