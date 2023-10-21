@@ -48,4 +48,5 @@ jobs:
                 -e DB_USERNAME=${{secrets.DB_USERNAME}} \
                 -e DB_PASSWORD=${{secrets.DB_PASSWORD}} \
                 -e JWT_SECRET=${{secrets.JWT_SECRET}} \
+                -e APP_PORT=${{secrets.APP_PORT}} \
                 ${{ secrets.DOCKERHUB_USERNAME }}/ruang-kegiatan
