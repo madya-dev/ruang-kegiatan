@@ -16,6 +16,7 @@ func InitDB(c config.Config) *gorm.DB {
 		c.DBHost,
 		c.DBPort,
 		c.DBName)
+	fmt.Println(connStr)
 	db, err := gorm.Open(mysql.Open(connStr), &gorm.Config{})
 	if err != nil {
 		log.Fatal("cannot connect database, ", err.Error())
