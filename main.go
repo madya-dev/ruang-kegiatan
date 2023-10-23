@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+	"madyasantosa/ruangkegiatan/config"
+	"madyasantosa/ruangkegiatan/pkg/database"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -25,6 +27,9 @@ func main() {
 		}
 		return c.String(200, "PORT: "+port)
 	})
+
+	db := database.InitDB(*config.InitConfig())
+	database.Migrate(db)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", os.Getenv("APP_PORT"))))
 }
