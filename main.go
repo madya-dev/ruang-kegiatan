@@ -2,34 +2,22 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"madyasantosa/ruangkegiatan/config"
 	"madyasantosa/ruangkegiatan/pkg/database"
-	"os"
 
-	"github.com/joho/godotenv"
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		// log.Fatalf("Error loading .env file: %v", err)
-		log.Println("Error loading .env file: %v", err)
-	}
-
+	config := *config.InitConfig()
 	e := echo.New()
-
-	e.GET("/", func(c echo.Context) error {
-		port := os.Getenv("APP_PORT")
-		if port == "" {
-			return c.String(500, "APP_PORT environment variable not set")
-		}
-		return c.String(200, "PORT: "+port)
-	})
-
-	db := database.InitDB(*config.InitConfig())
+	db := database.InitDB(config)
 	database.Migrate(db)
 
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", os.Getenv("APP_PORT"))))
+	fmt.Println(config)
+	e.GET("/", func(c echo.Context) error {
+		return c.String(200, "PORT: "+config.AppPort)
+	})
+
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.AppPort)))
 }
