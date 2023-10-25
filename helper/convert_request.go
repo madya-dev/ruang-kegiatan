@@ -35,3 +35,10 @@ func UserRoleUpdateRequestToUserModel(r dto.UserRoleUpdateRequest) *model.User {
 		Role: model.Role(r.Role),
 	}
 }
+
+func RoomRequestToRoomModel(r dto.RoomRequest) *model.Room {
+	return &model.Room{
+		RoomName: r.RoomName,
+		Capacity: r.Capacity,
+	}
+}

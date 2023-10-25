@@ -8,8 +8,10 @@ import (
 
 type RoomRespository interface {
 	GetAllRooms(offset int, limit int, search string) ([]model.Room, int, error)
-	CreateRoom(room *model.Room) (*model.Room, error)
-	UpdateRoom(room *model.Room, id int) (*model.Room, error)
+	CreateRoom(room *model.Room) error
+	UpdateRoom(room *model.Room, id int) error
+	FindRoomById(id int) (*model.Room, error)
+	FindRoomByName(name string) (*model.Room, error)
 	DeleteRoom(id int) error
 }
 
