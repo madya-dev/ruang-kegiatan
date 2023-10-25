@@ -1,13 +1,14 @@
 package routes
 
 import (
-	"madyasantosa/ruangkegiatan/features/users/handler"
+	roomHandler "madyasantosa/ruangkegiatan/features/rooms/handler"
+	userHandler "madyasantosa/ruangkegiatan/features/users/handler"
 	"madyasantosa/ruangkegiatan/middleware"
 
 	"github.com/labstack/echo/v4"
 )
 
-func UserRoutes(e *echo.Echo, uh handler.UserHandler) {
+func UserRoutes(e *echo.Echo, uh userHandler.UserHandler) {
 	e.POST("/login", uh.UserLogin)
 	e.POST("/register", uh.RegisterUser)
 	e.PATCH("/users/change-password", uh.ChangePassword, middleware.AuthMiddleware)
@@ -16,4 +17,11 @@ func UserRoutes(e *echo.Echo, uh handler.UserHandler) {
 	e.PUT("/users/:username", uh.UpdateUser, middleware.AuthMiddleware)
 	e.DELETE("/users/:username", uh.DeleteUser, middleware.AuthMiddlewareAdmin)
 	e.PATCH("/users/:username/role", uh.UpdateRoleUser, middleware.AuthMiddlewareAdmin)
+}
+
+func RoomRoutes(e *echo.Echo, rh roomHandler.RoomHandler) {
+	e.GET("/rooms", rh.GetAllRooms)
+	e.POST("/rooms", rh.CreateRoom, middleware.AuthMiddlewareAdmin)
+	e.PUT("/rooms/:id", rh.UpdateRoom, middleware.AuthMiddlewareAdmin)
+	e.DELETE("/rooms/:id", rh.DeleteRoom, middleware.AuthMiddlewareAdmin)
 }

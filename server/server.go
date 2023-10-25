@@ -3,6 +3,9 @@ package server
 import (
 	"fmt"
 	"madyasantosa/ruangkegiatan/config"
+	roomHandlerPkg "madyasantosa/ruangkegiatan/features/rooms/handler"
+	roomRepositoryPkg "madyasantosa/ruangkegiatan/features/rooms/repository"
+	roomServicePkg "madyasantosa/ruangkegiatan/features/rooms/service"
 	userHandlerPkg "madyasantosa/ruangkegiatan/features/users/handler"
 	userRepositoryPkg "madyasantosa/ruangkegiatan/features/users/repository"
 	userServicePkg "madyasantosa/ruangkegiatan/features/users/service"
@@ -31,11 +34,16 @@ func InitServer() error {
 	userService := userServicePkg.NewUserService(userRepository, validate)
 	userHandler := userHandlerPkg.NewUserHandler(userService)
 
+	roomRespository := roomRepositoryPkg.NewRoomRespository(db)
+	roomService := roomServicePkg.NewRoomService(roomRespository, validate)
+	roomHandler := roomHandlerPkg.NewRoomHandler(roomService)
+
 	e.GET("/", func(c echo.Context) error {
 		return c.String(200, "PORT: "+config.AppPort)
 	})
 
 	routes.UserRoutes(e, userHandler)
+	routes.RoomRoutes(e, roomHandler)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.AppPort)))
 

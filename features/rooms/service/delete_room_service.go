@@ -7,7 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (s *RoomServiceImpl) DeleteUser(ctx echo.Context) error {
+func (s *RoomServiceImpl) DeleteRoom(ctx echo.Context) error {
 	id, err := strconv.Atoi(ctx.Param("id"))
 
 	if err == nil {
