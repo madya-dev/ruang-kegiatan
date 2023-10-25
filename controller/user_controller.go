@@ -105,7 +105,7 @@ func (uc *UserControllerImpl) UpdateUser(ctx echo.Context) error {
 	data, _ := helper.ExtractToken(userToken)
 
 	if data.Role != "admin" && data.Username != ctx.Param("username") {
-		return helper.StatusForbidden(ctx, "Access Forbidden!")
+		return helper.StatusForbidden(ctx, fmt.Errorf("Access Forbidden!"))
 	}
 
 	userUpdateRequest := dto.UserUpdateRequest{}
@@ -155,7 +155,6 @@ func (uc *UserControllerImpl) ChangePassword(ctx echo.Context) error {
 	authorization := ctx.Request().Header["Authorization"]
 	userToken := strings.Split(authorization[0], " ")[1]
 	data, err := helper.ExtractToken(userToken)
-	fmt.Println(data, err, data.Role)
 
 	changePasswordRequest := dto.ChangePasswordRequest{}
 	err = ctx.Bind(&changePasswordRequest)
