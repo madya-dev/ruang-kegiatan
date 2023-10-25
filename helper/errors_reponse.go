@@ -28,6 +28,9 @@ func StatusInternalServerError(ctx echo.Context, err error) error {
 func StatusBadRequest(ctx echo.Context, err error) error {
 	return errorResponse(ctx, http.StatusBadRequest, err.Error(), "Bad Request!")
 }
+func StatusForbidden(ctx echo.Context, err error) error {
+	return errorResponse(ctx, http.StatusForbidden, err.Error(), "Access Forbidden!")
+}
 func StatusUnauthorized(ctx echo.Context, err error) error {
 	return errorResponse(ctx, http.StatusUnauthorized, err.Error(), "Unauthorized!")
 }
