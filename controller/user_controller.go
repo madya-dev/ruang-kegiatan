@@ -100,6 +100,14 @@ func (uc *UserControllerImpl) RegisterUser(ctx echo.Context) error {
 }
 
 func (uc *UserControllerImpl) UpdateUser(ctx echo.Context) error {
+	authorization := ctx.Request().Header["Authorization"]
+	userToken := strings.Split(authorization[0], " ")[1]
+	data, _ := helper.ExtractToken(userToken)
+
+	if data.Role != "admin" && data.Username != ctx.Param("username") {
+		return helper.StatusForbidden(ctx, "Access Forbidden!")
+	}
+
 	userUpdateRequest := dto.UserUpdateRequest{}
 	err := ctx.Bind(&userUpdateRequest)
 	fmt.Println(userUpdateRequest)
