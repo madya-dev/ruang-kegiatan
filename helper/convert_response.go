@@ -17,3 +17,11 @@ func ConvertToUserResponse(r *model.User) *dto.UserResponse {
 		Role:         string(r.Role),
 	}
 }
+
+func ConvertToRoomResponse(r *model.Room) *dto.RoomResponse {
+	return &dto.RoomResponse{
+		ID:       int(r.ID),
+		RoomName: r.RoomName,
+		Capacity: r.Capacity,
+	}
+}

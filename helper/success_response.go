@@ -32,6 +32,9 @@ func successResponseNoData(ctx echo.Context, code int, message string) error {
 func StatusCreated(ctx echo.Context, message string, data any) error {
 	return successResponse(ctx, http.StatusCreated, message, data)
 }
+func StatusCreatedNoContent(ctx echo.Context, message string) error {
+	return successResponseNoData(ctx, http.StatusCreated, message)
+}
 func StatusNoContent(ctx echo.Context, message string) error {
 	return successResponseNoData(ctx, http.StatusNoContent, message)
 }
