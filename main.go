@@ -11,17 +11,21 @@ import (
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	config := *config.InitConfig()
 
-	e := echo.New()
-
 	validate := validator.New()
 
 	db := database.InitDB(config)
 	database.Migrate(db)
+
+	e := echo.New()
+	e.Pre(middleware.RemoveTrailingSlash())
+	e.Use(middleware.CORS())
+	e.Use(middleware.Logger())
 
 	userRepository := repository.NewUserRepository(db)
 	userService := service.NewUserService(userRepository, validate)

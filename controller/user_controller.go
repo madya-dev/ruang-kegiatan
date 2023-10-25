@@ -147,7 +147,6 @@ func (uc *UserControllerImpl) ChangePassword(ctx echo.Context) error {
 	authorization := ctx.Request().Header["Authorization"]
 	userToken := strings.Split(authorization[0], " ")[1]
 	data, err := helper.ExtractToken(userToken)
-	fmt.Println(data, err, data.Role)
 
 	changePasswordRequest := dto.ChangePasswordRequest{}
 	err = ctx.Bind(&changePasswordRequest)
