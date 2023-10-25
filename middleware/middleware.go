@@ -10,10 +10,19 @@ import (
 
 func AuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-
 		authorization := c.Request().Header["Authorization"]
-		userToken := strings.Split(authorization[0], " ")[1]
-		_, err := helper.ExtractToken(userToken)
+
+		if len(authorization) <= 0 {
+			return helper.StatusUnauthorized(c, fmt.Errorf("No token"))
+		}
+
+		userToken := strings.Split(authorization[0], " ")
+
+		if len(userToken) <= 1 {
+			return helper.StatusBadRequest(c, fmt.Errorf("Invalid token"))
+		}
+
+		_, err := helper.ExtractToken(userToken[1])
 
 		if err != nil {
 			return helper.StatusBadRequest(c, err)
@@ -24,10 +33,19 @@ func AuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 }
 func AuthMiddlewareAdmin(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-
 		authorization := c.Request().Header["Authorization"]
-		userToken := strings.Split(authorization[0], " ")[1]
-		data, err := helper.ExtractToken(userToken)
+
+		if len(authorization) <= 0 {
+			return helper.StatusUnauthorized(c, fmt.Errorf("No token"))
+		}
+
+		userToken := strings.Split(authorization[0], " ")
+
+		if len(userToken) <= 1 {
+			return helper.StatusBadRequest(c, fmt.Errorf("Invalid token"))
+		}
+
+		data, err := helper.ExtractToken(userToken[1])
 
 		if err != nil {
 			return helper.StatusBadRequest(c, err)
