@@ -29,4 +29,5 @@ func RoomRoutes(e *echo.Echo, rh roomHandler.RoomHandler) {
 
 func ReservationRoutes(e *echo.Echo, rh reservationHandler.ReservationHanlder) {
 	e.GET("/reservations", rh.GetAllReservation)
+	e.DELETE("/reservations", rh.DeleteReservation)
 }
