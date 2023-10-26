@@ -1,6 +1,7 @@
 package routes
 
 import (
+	reservationHandler "madyasantosa/ruangkegiatan/features/reservation/handler"
 	roomHandler "madyasantosa/ruangkegiatan/features/rooms/handler"
 	userHandler "madyasantosa/ruangkegiatan/features/users/handler"
 	"madyasantosa/ruangkegiatan/middleware"
@@ -24,4 +25,8 @@ func RoomRoutes(e *echo.Echo, rh roomHandler.RoomHandler) {
 	e.POST("/rooms", rh.CreateRoom, middleware.AuthMiddlewareAdmin)
 	e.PUT("/rooms/:id", rh.UpdateRoom, middleware.AuthMiddlewareAdmin)
 	e.DELETE("/rooms/:id", rh.DeleteRoom, middleware.AuthMiddlewareAdmin)
+}
+
+func ReservationRoutes(e *echo.Echo, rh reservationHandler.ReservationHanlder) {
+	e.GET("/reservations", rh.GetAllReservation)
 }
