@@ -8,7 +8,7 @@ import (
 
 type ReservationHanlder interface {
 	GetAllReservation(ctx echo.Context) error
-	// DeleteReservation(ctx echo.Context) error
+	DeleteReservation(ctx echo.Context) error
 	// CreateReservation(ctx echo.Context) error
 	// UpdateReservation(ctx echo.Context) error
 }

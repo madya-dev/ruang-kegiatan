@@ -14,3 +14,7 @@ type Reservation struct {
 	PIC          string    `json:"pic"`
 	Phone        string    `json:"phone"`
 }
+type ReservationCheck struct {
+	ID  int    `json:"id"`
+	PIC string `json:"pic"`
+}

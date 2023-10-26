@@ -10,7 +10,7 @@ import (
 func (s *RoomServiceImpl) DeleteRoom(ctx echo.Context) error {
 	id, err := strconv.Atoi(ctx.Param("id"))
 
-	if err == nil {
+	if err != nil {
 		return fmt.Errorf("id not valid")
 	}
 

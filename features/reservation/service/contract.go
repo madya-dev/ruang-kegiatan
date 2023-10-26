@@ -10,7 +10,7 @@ import (
 
 type ReservationService interface {
 	GetAllReservation(ctx echo.Context) ([]dto.Reservation, int, error)
-	// DeleteReservation(ctx echo.Context) error
+	DeleteReservation(ctx echo.Context, username string) error
 	// CreateReservation(ctx echo.Context, r dto.RoomRequest) error
 	// UpdateReservation(ctx echo.Context, r dto.RoomRequest) error
 }
