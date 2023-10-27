@@ -13,9 +13,7 @@ type ReservationRepository interface {
 	CheckReservation(id int) (*dto.ReservationCheck, error)
 	CreateReservation(reservation *model.Reservation) error
 	IsAvaible(roomID int64, startTime time.Time, endTime time.Time) (*model.Reservation, error)
-	// UpdateReservation(Reservation *model.Reservation, id int) error
-	// FindReservationById(id int) (*model.Reservation, error)
-	// FindReservationByName(name string) (*model.Reservation, error)
+	UpdateReservation(reservation *model.Reservation, id int) error
 	DeleteReservation(id int) error
 }
 

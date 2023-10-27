@@ -12,7 +12,7 @@ type ReservationService interface {
 	GetAllReservation(ctx echo.Context) ([]dto.ReservationResponse, int, error)
 	DeleteReservation(ctx echo.Context, username string) error
 	CreateReservation(ctx echo.Context, r dto.ReservationRequest, pic string) error
-	// UpdateReservation(ctx echo.Context, r dto.RoomRequest) error
+	UpdateReservation(ctx echo.Context, r dto.ReservationRequest, pic string) error
 }
 
 type ReservationServiceImpl struct {

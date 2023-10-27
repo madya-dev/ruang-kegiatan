@@ -31,4 +31,5 @@ func ReservationRoutes(e *echo.Echo, rh reservationHandler.ReservationHanlder) {
 	e.GET("/reservations", rh.GetAllReservation)
 	e.DELETE("/reservations/:id", rh.DeleteReservation)
 	e.POST("/reservations", rh.CreateReservation)
+	e.PUT("/reservations/:id", rh.UpdateReservation)
 }
