@@ -9,7 +9,7 @@ func (r *ReservationRepositoryImpl) CheckReservation(id int) (*dto.ReservationCh
 	reservation := &dto.ReservationCheck{}
 
 	result := r.DB.Model(&model.Reservation{}).
-		Select("id, pic").Where("id = ?", id).
+		Select("id, pic, start_time").Where("id = ?", id).
 		Find(&reservation)
 
 	if result.Error != nil {

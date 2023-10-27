@@ -2,7 +2,9 @@ package service
 
 import (
 	"fmt"
+	"madyasantosa/ruangkegiatan/pkg/s3"
 	"strconv"
+	"time"
 
 	"github.com/labstack/echo/v4"
 )
@@ -16,7 +18,7 @@ func (s *ReservationServiceImpl) DeleteReservation(ctx echo.Context, username st
 
 	res, err := s.ReservationRepository.CheckReservation(id)
 
-	if err != nil {
+	if res == nil {
 		return fmt.Errorf("Reservation not found")
 	}
 
@@ -29,6 +31,8 @@ func (s *ReservationServiceImpl) DeleteReservation(ctx echo.Context, username st
 	if err != nil {
 		return err
 	}
+
+	err = s3.DeleteFileS3(res.PIC, strconv.FormatInt(time.Time(res.StartTime).Unix(), 10))
 
 	return nil
 }

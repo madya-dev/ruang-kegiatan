@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"madyasantosa/ruangkegiatan/dto"
 	"madyasantosa/ruangkegiatan/helper"
+	"strconv"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -23,7 +24,7 @@ func (s *ReservationServiceImpl) CreateReservation(ctx echo.Context, r dto.Reser
 
 	fileHeader, err := ctx.FormFile("document")
 
-	docsUrl, err := helper.UploadToS3(fileHeader, pic, time.Time(r.StartTime).String())
+	docsUrl, err := helper.UploadToS3(fileHeader, pic, strconv.FormatInt(time.Time(r.StartTime).Unix(), 10))
 
 	if err != nil {
 		return fmt.Errorf("Error when upload file %s:", err.Error())

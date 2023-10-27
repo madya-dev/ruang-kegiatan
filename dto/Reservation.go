@@ -16,8 +16,9 @@ type ReservationResponse struct {
 	UpdatedAt    time.Time `json:"timestamp"`
 }
 type ReservationCheck struct {
-	ID  int    `json:"id"`
-	PIC string `json:"pic"`
+	ID        int       `json:"id"`
+	PIC       string    `json:"pic"`
+	StartTime time.Time `json:"start_time"`
 }
 
 type ReservationRequest struct {
