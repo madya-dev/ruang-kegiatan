@@ -42,3 +42,16 @@ func RoomRequestToRoomModel(r dto.RoomRequest) *model.Room {
 		Capacity: r.Capacity,
 	}
 }
+
+func ReservationRequestToReservationModel(r dto.ReservationRequest, document string, username string) *model.Reservation {
+	return &model.Reservation{
+		RoomID:       r.RoomID,
+		Activity:     r.Activity,
+		StartTime:    r.StartTime,
+		EndTime:      r.EndTime,
+		StudyProgram: r.StudyProgram,
+		ClassOf:      r.ClassOf,
+		Document:     document,
+		PIC:          username,
+	}
+}

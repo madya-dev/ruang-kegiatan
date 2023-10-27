@@ -5,8 +5,8 @@ import (
 	"madyasantosa/ruangkegiatan/model"
 )
 
-func (r *ReservationRepositoryImpl) GetAllReservation(offset int, limit int, search string) ([]dto.Reservation, int, error) {
-	reservation := []dto.Reservation{}
+func (r *ReservationRepositoryImpl) GetAllReservation(offset int, limit int, search string) ([]dto.ReservationResponse, int, error) {
+	reservation := []dto.ReservationResponse{}
 	var total int64
 
 	result := r.DB.Model(&model.Reservation{}).

@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (s *ReservationServiceImpl) GetAllReservation(ctx echo.Context) ([]dto.Reservation, int, error) {
+func (s *ReservationServiceImpl) GetAllReservation(ctx echo.Context) ([]dto.ReservationResponse, int, error) {
 	params := ctx.QueryParams()
 	search := params.Get("s")
 	limit, err := strconv.Atoi(params.Get("limit"))
