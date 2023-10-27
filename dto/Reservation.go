@@ -13,6 +13,7 @@ type ReservationResponse struct {
 	Document     string    `json:"document"`
 	PIC          string    `json:"pic"`
 	Phone        string    `json:"phone"`
+	UpdatedAt    time.Time `json:"timestamp"`
 }
 type ReservationCheck struct {
 	ID  int    `json:"id"`
