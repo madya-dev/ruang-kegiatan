@@ -19,11 +19,8 @@ func (rh *ReservationHanlderImpl) CreateReservation(ctx echo.Context) error {
 	err := ctx.Bind(&reservationCreateRequest)
 
 	if err != nil {
-		fmt.Println("error bind")
 		return helper.StatusBadRequest(ctx, err)
 	}
-
-	fmt.Println(reservationCreateRequest)
 
 	err = rh.ReservationService.CreateReservation(ctx, reservationCreateRequest, data.Username)
 

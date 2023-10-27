@@ -13,6 +13,7 @@ import (
 	userRepositoryPkg "madyasantosa/ruangkegiatan/features/users/repository"
 	userServicePkg "madyasantosa/ruangkegiatan/features/users/service"
 	"madyasantosa/ruangkegiatan/pkg/database"
+	"madyasantosa/ruangkegiatan/pkg/s3"
 	"madyasantosa/ruangkegiatan/routes"
 
 	"github.com/go-playground/validator"
@@ -27,6 +28,8 @@ func InitServer() error {
 
 	db := database.InitDB(config)
 	database.Migrate(db)
+
+	s3.NewUploader(config)
 
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
