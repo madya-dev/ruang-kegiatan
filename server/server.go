@@ -12,24 +12,15 @@ import (
 	userHandlerPkg "madyasantosa/ruangkegiatan/features/users/handler"
 	userRepositoryPkg "madyasantosa/ruangkegiatan/features/users/repository"
 	userServicePkg "madyasantosa/ruangkegiatan/features/users/service"
-	"madyasantosa/ruangkegiatan/pkg/database"
-	"madyasantosa/ruangkegiatan/pkg/s3"
 	"madyasantosa/ruangkegiatan/routes"
 
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"gorm.io/gorm"
 )
 
-func InitServer() error {
-	config := *config.InitConfig()
-
-	validate := validator.New()
-
-	db := database.InitDB(config)
-	database.Migrate(db)
-
-	s3.NewUploader(config)
+func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate) error {
 
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
