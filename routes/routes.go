@@ -1,6 +1,7 @@
 package routes
 
 import (
+	notificationHandler "madyasantosa/ruangkegiatan/features/notification/handler"
 	reservationHandler "madyasantosa/ruangkegiatan/features/reservation/handler"
 	roomHandler "madyasantosa/ruangkegiatan/features/rooms/handler"
 	userHandler "madyasantosa/ruangkegiatan/features/users/handler"
@@ -32,4 +33,10 @@ func ReservationRoutes(e *echo.Echo, rh reservationHandler.ReservationHanlder) {
 	e.DELETE("/reservations/:id", rh.DeleteReservation, middleware.AuthMiddleware)
 	e.POST("/reservations", rh.CreateReservation, middleware.AuthMiddleware)
 	e.PUT("/reservations/:id", rh.UpdateReservation, middleware.AuthMiddleware)
+}
+
+func NotificationRoutes(e *echo.Echo, nh notificationHandler.NotificationHandler) {
+	e.GET("/notifications", nh.GetAllNotifications, middleware.AuthMiddlewareAdmin)
+	e.GET("/notifications/:username", nh.GetNotifications, middleware.AuthMiddleware)
+	e.PATCH("/notifications/:id", nh.ReadNotification, middleware.AuthMiddleware)
 }

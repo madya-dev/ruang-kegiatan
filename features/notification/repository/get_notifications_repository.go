@@ -4,19 +4,15 @@ import (
 	"madyasantosa/ruangkegiatan/model"
 )
 
-func (r *NotificationRepositoryImpl) GetNotifications(offset int, limit int, username string) ([]model.Notification, int, error) {
+func (r *NotificationRepositoryImpl) GetNotifications(offset int, limit int, username string) ([]model.Notification, error) {
 	notif := []model.Notification{}
 
-	var unReadTotal int64
-
-	r.DB.Where("username = ? AND is_read = false", username).Find(&notif).Count(&unReadTotal)
-
-	result := r.DB.Where("username = ? AND is_read = false", username).Offset(offset).Limit(limit).Find(&notif)
+	result := r.DB.Where("username = ?", username).Offset(offset).Limit(limit).Find(&notif)
 
 	if result.Error != nil {
-		return nil, int(unReadTotal), result.Error
+		return nil, result.Error
 	}
-	return notif, int(unReadTotal), nil
+	return notif, nil
 }
 
 func (r *NotificationRepositoryImpl) GetAllNotifications(offset int, limit int) ([]model.Notification, int, error) {

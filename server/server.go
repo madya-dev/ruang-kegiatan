@@ -40,7 +40,7 @@ func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate)
 
 	notificationRepository := notificationRepositoryPkg.NewNotificationRepository(db)
 	notificationService := notificationServicePkg.NewNotificationService(notificationRepository, validate)
-	_ = notificationHandlerPkg.NewNotificationHandler(notificationService)
+	notificationHandler := notificationHandlerPkg.NewNotificationHandler(notificationService)
 
 	reservationRepository := resevationRepositoryPkg.NewReservationRepository(db)
 	reservationService := reservationServicePkg.NewReservationService(reservationRepository, validate, notificationRepository)
@@ -53,6 +53,7 @@ func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate)
 	routes.UserRoutes(e, userHandler)
 	routes.RoomRoutes(e, roomHandler)
 	routes.ReservationRoutes(e, reservationHandler)
+	routes.NotificationRoutes(e, notificationHandler)
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.AppPort)))
 

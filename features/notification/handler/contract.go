@@ -9,6 +9,9 @@ import (
 
 type NotificationHandler interface {
 	CreateNotification(ctx echo.Context, r dto.NotificationRequest) error
+	GetNotifications(ctx echo.Context) error
+	GetAllNotifications(ctx echo.Context) error
+	ReadNotification(ctx echo.Context) error
 }
 
 type NotificationHandlerImpl struct {
