@@ -1,8 +1,12 @@
 package repository
 
-import "madyasantosa/ruangkegiatan/model"
+import (
+	"fmt"
+	"madyasantosa/ruangkegiatan/model"
+)
 
 func (r *NotificationRepositoryImpl) CreateNotification(notif *model.Notification) error {
+	fmt.Println("Teststststststst")
 	result := r.DB.Create(&notif)
 
 	if result.Error != nil {

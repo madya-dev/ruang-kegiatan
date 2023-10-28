@@ -3,6 +3,9 @@ package server
 import (
 	"fmt"
 	"madyasantosa/ruangkegiatan/config"
+	notificationHandlerPkg "madyasantosa/ruangkegiatan/features/notification/handler"
+	notificationRepositoryPkg "madyasantosa/ruangkegiatan/features/notification/repository"
+	notificationServicePkg "madyasantosa/ruangkegiatan/features/notification/service"
 	reservationHandlerPkg "madyasantosa/ruangkegiatan/features/reservation/handler"
 	resevationRepositoryPkg "madyasantosa/ruangkegiatan/features/reservation/repository"
 	reservationServicePkg "madyasantosa/ruangkegiatan/features/reservation/service"
@@ -35,8 +38,12 @@ func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate)
 	roomService := roomServicePkg.NewRoomService(roomRespository, validate)
 	roomHandler := roomHandlerPkg.NewRoomHandler(roomService)
 
+	notificationRepository := notificationRepositoryPkg.NewNotificationRepository(db)
+	notificationService := notificationServicePkg.NewNotificationService(notificationRepository, validate)
+	_ = notificationHandlerPkg.NewNotificationHandler(notificationService)
+
 	reservationRepository := resevationRepositoryPkg.NewReservationRepository(db)
-	reservationService := reservationServicePkg.NewReservationService(reservationRepository, validate)
+	reservationService := reservationServicePkg.NewReservationService(reservationRepository, validate, notificationRepository)
 	reservationHandler := reservationHandlerPkg.NewReservationHanlder(reservationService)
 
 	e.GET("/", func(c echo.Context) error {

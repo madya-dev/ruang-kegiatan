@@ -55,3 +55,11 @@ func ReservationRequestToReservationModel(r dto.ReservationRequest, document str
 		PIC:          username,
 	}
 }
+
+func NotificationCreateRequestToNotificationModel(r dto.NotificationRequest) *model.Notification {
+	return &model.Notification{
+		Title:   r.Title,
+		Message: r.Message,
+		PIC:     r.Username,
+	}
+}

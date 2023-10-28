@@ -9,7 +9,7 @@ import (
 type NotificationRepository interface {
 	GetNotifications(offset int, limit int, username string) ([]model.Notification, int, error)
 	GetAllNotifications(offset int, limit int) ([]model.Notification, int, error)
-	CreateNotification(user *model.Notification) error
+	CreateNotification(notif *model.Notification) error
 	ReadNotification(id int) error
 }
 

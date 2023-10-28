@@ -57,11 +57,19 @@ func (s *ReservationServiceImpl) UpdateReservation(ctx echo.Context, r dto.Reser
 		return fmt.Errorf("Error when updating reservation %s:", err.Error())
 	}
 
-	message := "Your reservation for " + data.Activity + " updated. Please check your reservation!"
+	notification := dto.NotificationRequest{
+		Title:    "Reservation Updated!",
+		Message:  "Your reservation for " + data.Activity + " updated. Please check your reservation!",
+		Username: username,
+	}
 
 	if registrationToken != "" {
-		firebase.SendNotification(registrationToken, "Reservation Updated!", message)
+		firebase.SendNotification(registrationToken, notification.Title, notification.Message)
 	}
+
+	notif := helper.NotificationCreateRequestToNotificationModel(notification)
+	fmt.Println("notif", notif)
+	_ = s.NotificationRepository.CreateNotification(notif)
 
 	return nil
 }
