@@ -29,7 +29,7 @@ func (s *ReservationServiceImpl) UpdateReservation(ctx echo.Context, r dto.Reser
 		return fmt.Errorf("Forbidden!")
 	}
 
-	data, _ := s.ReservationRepository.IsAvaible(r.RoomID, r.StartTime, r.EndTime)
+	data, registrationToken, _ := s.ReservationRepository.IsAvaible(r.RoomID, r.StartTime, r.EndTime)
 
 	if data != nil && data.ID != int64(id) {
 		return fmt.Errorf("Reservation failed, room already book to %s by %s", data.Activity, data.PIC)
@@ -59,7 +59,9 @@ func (s *ReservationServiceImpl) UpdateReservation(ctx echo.Context, r dto.Reser
 
 	message := "Your reservation for " + data.Activity + " updated. Please check your reservation!"
 
-	firebase.SendNotification("cVtcoEkNhF038xc5rKD0u4:APA91bFiEqmgD7XE0uksikpl4eC8rqca4MkH1cE87T1qsdZSSNPtCvw9UZsucVD6EggpidNQ_OfzkvuaYEZTJ63yPvdtt_cP0D-IQObziFzGVaSeCGXs2gGBhg2cICWnBbKW2Ay8ONs-", "Reservation Updated!", message)
+	if registrationToken != "" {
+		firebase.SendNotification(registrationToken, "Reservation Updated!", message)
+	}
 
 	return nil
 }

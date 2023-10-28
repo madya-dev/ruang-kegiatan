@@ -16,7 +16,7 @@ func (s *ReservationServiceImpl) CreateReservation(ctx echo.Context, r dto.Reser
 		return helper.ValidationError(ctx, err)
 	}
 
-	res, _ := s.ReservationRepository.IsAvaible(r.RoomID, r.StartTime, r.EndTime)
+	res, _, _ := s.ReservationRepository.IsAvaible(r.RoomID, r.StartTime, r.EndTime)
 
 	if res != nil {
 		return fmt.Errorf("Reservation failed, room already book to %s by %s", res.Activity, res.PIC)
