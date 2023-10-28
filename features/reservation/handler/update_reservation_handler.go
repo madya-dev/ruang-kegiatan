@@ -31,6 +31,9 @@ func (rh *ReservationHanlderImpl) UpdateReservation(ctx echo.Context) error {
 		if strings.Contains(err.Error(), "room already book") {
 			return helper.StatusBadRequest(ctx, err)
 		}
+		if strings.Contains(err.Error(), "notification") {
+			return helper.StatusBadRequest(ctx, err)
+		}
 		return helper.StatusInternalServerError(ctx, fmt.Errorf("Failed to update reservation"))
 	}
 

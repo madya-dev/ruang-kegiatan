@@ -2,6 +2,7 @@ package service
 
 import (
 	"madyasantosa/ruangkegiatan/dto"
+	notifRepo "madyasantosa/ruangkegiatan/features/notification/repository"
 	"madyasantosa/ruangkegiatan/features/reservation/repository"
 
 	"github.com/go-playground/validator"
@@ -16,13 +17,15 @@ type ReservationService interface {
 }
 
 type ReservationServiceImpl struct {
-	ReservationRepository repository.ReservationRepository
-	Validate              *validator.Validate
+	ReservationRepository  repository.ReservationRepository
+	Validate               *validator.Validate
+	NotificationRepository notifRepo.NotificationRepository
 }
 
-func NewReservationService(rr repository.ReservationRepository, validate *validator.Validate) *ReservationServiceImpl {
+func NewReservationService(rr repository.ReservationRepository, validate *validator.Validate, nr notifRepo.NotificationRepository) *ReservationServiceImpl {
 	return &ReservationServiceImpl{
-		ReservationRepository: rr,
-		Validate:              validate,
+		ReservationRepository:  rr,
+		Validate:               validate,
+		NotificationRepository: nr,
 	}
 }

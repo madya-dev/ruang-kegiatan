@@ -7,5 +7,5 @@ import (
 )
 
 func Migrate(db *gorm.DB) {
-	db.AutoMigrate(&model.User{}, &model.Room{}, &model.Reservation{})
+	db.AutoMigrate(&model.User{}, &model.Room{}, &model.Reservation{}, &model.Notification{})
 }
