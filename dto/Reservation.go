@@ -19,6 +19,7 @@ type ReservationCheck struct {
 	ID        int       `json:"id"`
 	PIC       string    `json:"pic"`
 	StartTime time.Time `json:"start_time"`
+	Document  string    `json:"document"`
 }
 
 type ReservationRequest struct {
