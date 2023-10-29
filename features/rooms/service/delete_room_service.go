@@ -8,15 +8,13 @@ import (
 )
 
 func (s *RoomServiceImpl) DeleteRoom(ctx echo.Context) error {
-	id, err := strconv.Atoi(ctx.Param("id"))
-
+	idStr := ctx.Param("id")
+	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		return fmt.Errorf("id not valid")
+		return fmt.Errorf("id not valid: %v", err)
 	}
 
-	err = s.RoomRespository.DeleteRoom(id)
-
-	if err != nil {
+	if err := s.RoomRespository.DeleteRoom(id); err != nil {
 		return err
 	}
 
