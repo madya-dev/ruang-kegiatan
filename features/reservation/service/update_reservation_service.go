@@ -68,7 +68,7 @@ func (s *ReservationServiceImpl) UpdateReservation(ctx echo.Context, r dto.Reser
 	}
 
 	notif := helper.NotificationCreateRequestToNotificationModel(notification)
-	fmt.Println("notif", notif)
+
 	_ = s.NotificationRepository.CreateNotification(notif)
 
 	return nil

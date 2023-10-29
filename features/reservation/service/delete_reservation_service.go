@@ -32,7 +32,9 @@ func (s *ReservationServiceImpl) DeleteReservation(ctx echo.Context, username st
 		return err
 	}
 
-	err = s3.DeleteFileS3(res.PIC, strconv.FormatInt(time.Time(res.StartTime).Unix(), 10))
+	if res.Document != "" {
+		err = s3.DeleteFileS3(res.PIC, strconv.FormatInt(time.Time(res.StartTime).Unix(), 10))
+	}
 
 	return nil
 }
