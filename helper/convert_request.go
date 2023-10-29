@@ -35,3 +35,31 @@ func UserRoleUpdateRequestToUserModel(r dto.UserRoleUpdateRequest) *model.User {
 		Role: model.Role(r.Role),
 	}
 }
+
+func RoomRequestToRoomModel(r dto.RoomRequest) *model.Room {
+	return &model.Room{
+		RoomName: r.RoomName,
+		Capacity: r.Capacity,
+	}
+}
+
+func ReservationRequestToReservationModel(r dto.ReservationRequest, document string, username string) *model.Reservation {
+	return &model.Reservation{
+		RoomID:       r.RoomID,
+		Activity:     r.Activity,
+		StartTime:    r.StartTime,
+		EndTime:      r.EndTime,
+		StudyProgram: r.StudyProgram,
+		ClassOf:      r.ClassOf,
+		Document:     document,
+		PIC:          username,
+	}
+}
+
+func NotificationCreateRequestToNotificationModel(r dto.NotificationRequest) *model.Notification {
+	return &model.Notification{
+		Title:   r.Title,
+		Message: r.Message,
+		PIC:     r.Username,
+	}
+}
