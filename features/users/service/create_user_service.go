@@ -16,7 +16,7 @@ func (s *UserServiceImpl) CreateUser(ctx echo.Context, r dto.UserCreateRequest) 
 
 	existingUser, _ := s.UserRepository.GetUserByUsername(r.Username)
 	if existingUser != nil {
-		return nil, fmt.Errorf("Username Already Exists")
+		return nil, fmt.Errorf("User already exists")
 	}
 
 	user := helper.UserCreateRequestToUserModel(r)
