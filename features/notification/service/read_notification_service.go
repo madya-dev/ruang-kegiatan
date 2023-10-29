@@ -7,7 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (s *NotificationServiceImpl) ReadNotification(ctx echo.Context, id int) error {
+func (s *NotificationServiceImpl) ReadNotification(ctx echo.Context) error {
 	id, err := strconv.Atoi(ctx.Param("id"))
 
 	if err != nil {

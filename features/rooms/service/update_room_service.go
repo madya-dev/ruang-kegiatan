@@ -15,9 +15,10 @@ func (s *RoomServiceImpl) UpdateRoom(ctx echo.Context, r dto.RoomRequest) error 
 		return helper.ValidationError(ctx, err)
 	}
 
-	id, err := strconv.Atoi(ctx.Param("id"))
-	if err == nil {
-		return fmt.Errorf("id not valid")
+	idStr := ctx.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		return fmt.Errorf("id not valid: %v", err)
 	}
 
 	existingRoom, _ := s.RoomRespository.FindRoomById(id)
@@ -31,7 +32,7 @@ func (s *RoomServiceImpl) UpdateRoom(ctx echo.Context, r dto.RoomRequest) error 
 	err = s.RoomRespository.UpdateRoom(room, id)
 
 	if err != nil {
-		return fmt.Errorf("Error when updating user: %s", err.Error())
+		return fmt.Errorf("Error when updating room: %s", err.Error())
 	}
 
 	return nil

@@ -9,13 +9,13 @@ import (
 )
 
 func (nh *NotificationHandlerImpl) ReadNotification(ctx echo.Context) error {
-	id, err := strconv.Atoi(ctx.Param("id"))
+	_, err := strconv.Atoi(ctx.Param("id"))
 
 	if err != nil {
 		return helper.StatusBadRequest(ctx, fmt.Errorf("Notification ID not valid!"))
 	}
 
-	err = nh.NotificationService.ReadNotification(ctx, id)
+	err = nh.NotificationService.ReadNotification(ctx)
 
 	if err != nil {
 		return helper.StatusInternalServerError(ctx, fmt.Errorf("Failed to update notification"))

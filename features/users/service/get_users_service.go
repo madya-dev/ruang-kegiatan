@@ -24,11 +24,11 @@ func (s *UserServiceImpl) GetAllUsers(ctx echo.Context) ([]model.User, int, erro
 	}
 
 	users, total, err := s.UserRepository.GetAllUsers(offset, limit, search)
-	if err != nil {
-		return nil, total, fmt.Errorf("Internal Server Error")
-	}
 	if len(search) > 0 && total <= 0 {
 		return nil, total, fmt.Errorf("Users not found")
+	}
+	if err != nil {
+		return nil, total, fmt.Errorf("Internal Server Error")
 	}
 	return users, total, nil
 }
