@@ -9,6 +9,6 @@ type Notification struct {
 	IsRead    bool      `json:"is_read" gorm:"default:false"`
 	PIC       string    `gorm:"not null;index;type:varchar(20)"`
 	CreatedAt time.Time `json:"notif_at" gorm:"autoCreateTime"`
-	UpdatedAt time.Time `gorm:"autoUpdateTime"`
-	User      User      `gorm:"foreignKey:PIC;references:Username;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
+	UpdatedAt time.Time `json:"-" gorm:"autoUpdateTime"`
+	User      User      `json:"-" gorm:"foreignKey:PIC;references:Username;constraint:OnDelete:CASCADE,OnUpdate:CASCADE"`
 }
