@@ -25,8 +25,8 @@ func TestUserServiceImpl_UpdateRoleUser(t *testing.T) {
 				}
 				return nil, fmt.Errorf("User not found")
 			},
-			UpdateRoleUserFunc: func(user *model.User, username string) (*model.User, error) {
-				return user, nil
+			UpdateRoleUserFunc: func(user *model.User, username string) error {
+				return nil
 			},
 		},
 		Validate: validator.New(),
@@ -44,11 +44,9 @@ func TestUserServiceImpl_UpdateRoleUser(t *testing.T) {
 			Role: "admin",
 		}
 
-		userResponse, err := userService.UpdateRoleUser(c, roleUpdateRequest)
+		err := userService.UpdateRoleUser(c, roleUpdateRequest)
 
 		assert.NoError(t, err)
-		assert.NotNil(t, userResponse)
-		assert.Equal(t, "admin", userResponse.Role)
 	})
 
 	t.Run("UserNotFound", func(t *testing.T) {
@@ -58,10 +56,9 @@ func TestUserServiceImpl_UpdateRoleUser(t *testing.T) {
 			Role: "admin",
 		}
 
-		userResponse, err := userService.UpdateRoleUser(c, roleUpdateRequest)
+		err := userService.UpdateRoleUser(c, roleUpdateRequest)
 
 		assert.Error(t, err)
-		assert.Nil(t, userResponse)
 		assert.Contains(t, err.Error(), "User not found")
 	})
 }

@@ -12,7 +12,7 @@ type UserRepository interface {
 	CreateUser(user *model.User) (*model.User, error)
 	UpdateUser(user *model.User, username string) (*model.User, error)
 	ChangePassword(user *model.User, username string) error
-	UpdateRoleUser(user *model.User, username string) (*model.User, error)
+	UpdateRoleUser(user *model.User, username string) error
 	DeleteUser(username string) error
 }
 

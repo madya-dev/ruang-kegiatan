@@ -21,8 +21,22 @@ func (uc *UserHandlerImpl) RegisterUser(ctx echo.Context) error {
 		if strings.Contains(err.Error(), "Validation failed") {
 			return helper.StatusBadRequest(ctx, err)
 		}
+		if strings.Contains(err.Error(), "User already exists") {
+			return helper.StatusAccountAlreadyExists(ctx, err)
+		}
 		return helper.StatusInternalServerError(ctx, fmt.Errorf("Failed to create user"))
 	}
 
-	return helper.StatusCreated(ctx, "Success to created user", res)
+	token, err := helper.GenerateToken(&dto.Token{Username: res.Username, Role: res.Role})
+	if err != nil {
+		return helper.StatusInternalServerError(ctx, err)
+	}
+
+	loginResponse := &dto.UserLoginResponse{
+		Username: res.Username,
+		Role:     res.Role,
+		Token:    token,
+	}
+
+	return helper.StatusOK(ctx, "Success to created user", loginResponse)
 }

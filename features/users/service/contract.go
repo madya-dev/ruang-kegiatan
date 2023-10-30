@@ -17,7 +17,7 @@ type UserService interface {
 	UserLogin(ctx echo.Context, r dto.UserLoginRequest) (*dto.UserResponse, error)
 	CreateUser(ctx echo.Context, r dto.UserCreateRequest) (*dto.UserResponse, error)
 	UpdateUser(ctx echo.Context, r dto.UserUpdateRequest) (*dto.UserResponse, error)
-	UpdateRoleUser(ctx echo.Context, r dto.UserRoleUpdateRequest) (*dto.UserResponse, error)
+	UpdateRoleUser(ctx echo.Context, r dto.UserRoleUpdateRequest) error
 }
 
 type UserServiceImpl struct {

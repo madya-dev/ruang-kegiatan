@@ -29,6 +29,10 @@ func (uc *UserHandlerImpl) ChangePassword(ctx echo.Context) error {
 			return helper.StatusNotFound(ctx, fmt.Errorf("User %s not found!", data.Username))
 		}
 
+		if strings.Contains(err.Error(), "Invalid old password") {
+			return helper.StatusNotFound(ctx, err)
+		}
+
 		return helper.StatusInternalServerError(ctx, fmt.Errorf("Failed change password user %s", data.Username))
 	}
 	return helper.StatusNoContent(ctx, "Success to change password user")
