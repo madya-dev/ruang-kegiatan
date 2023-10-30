@@ -36,5 +36,5 @@ func StatusUnauthorized(ctx echo.Context, err error) error {
 }
 
 func StatusAccountAlreadyExists(ctx echo.Context, err error) error {
-	return errorResponse(ctx, http.StatusConflict, err.Error(), "Account Already Exists!")
+	return errorResponse(ctx, http.StatusConflict, err.Error(), "Conflict!")
 }

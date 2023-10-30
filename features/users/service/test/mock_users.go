@@ -10,7 +10,7 @@ type MockUsersRepository struct {
 	CreateUserFunc        func(user *model.User) (*model.User, error)
 	UpdateUserFunc        func(user *model.User, username string) (*model.User, error)
 	ChangePasswordFunc    func(user *model.User, username string) error
-	UpdateRoleUserFunc    func(user *model.User, username string) (*model.User, error)
+	UpdateRoleUserFunc    func(user *model.User, username string) error
 	DeleteUserFunc        func(username string) error
 }
 
@@ -34,7 +34,7 @@ func (m *MockUsersRepository) ChangePassword(user *model.User, username string) 
 	return m.ChangePasswordFunc(user, username)
 }
 
-func (m *MockUsersRepository) UpdateRoleUser(user *model.User, username string) (*model.User, error) {
+func (m *MockUsersRepository) UpdateRoleUser(user *model.User, username string) error {
 	return m.UpdateRoleUserFunc(user, username)
 }
 

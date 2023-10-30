@@ -16,7 +16,7 @@ func (uc *UserHandlerImpl) UpdateRoleUser(ctx echo.Context) error {
 	if err != nil {
 		return helper.StatusBadRequest(ctx, err)
 	}
-	res, err := uc.UserService.UpdateRoleUser(ctx, userRoleUpdateRequest)
+	err = uc.UserService.UpdateRoleUser(ctx, userRoleUpdateRequest)
 	if err != nil {
 		if strings.Contains(err.Error(), "Validation failed") {
 			return helper.StatusBadRequest(ctx, err)
@@ -28,6 +28,6 @@ func (uc *UserHandlerImpl) UpdateRoleUser(ctx echo.Context) error {
 
 		return helper.StatusInternalServerError(ctx, fmt.Errorf("Failed update role user %s", ctx.Param("username")))
 	}
-	return helper.StatusOK(ctx, "Success to update role user", res)
+	return helper.StatusNoContent(ctx, "Success to update role user")
 
 }
