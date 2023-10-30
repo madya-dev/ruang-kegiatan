@@ -34,8 +34,11 @@ func (rh *ReservationHanlderImpl) UpdateReservation(ctx echo.Context) error {
 		if strings.Contains(err.Error(), "notification") {
 			return helper.StatusBadRequest(ctx, err)
 		}
+		if strings.Contains(err.Error(), "Reservation not found") {
+			return helper.StatusBadRequest(ctx, err)
+		}
 		return helper.StatusInternalServerError(ctx, fmt.Errorf("Failed to update reservation"))
 	}
 
-	return helper.StatusCreatedNoContent(ctx, "Success to update reservation")
+	return helper.StatusNoContent(ctx, "Success to update reservation")
 }

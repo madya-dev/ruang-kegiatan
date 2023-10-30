@@ -7,7 +7,7 @@ import (
 func (r *NotificationRepositoryImpl) GetNotifications(offset int, limit int, username string) ([]model.Notification, error) {
 	notif := []model.Notification{}
 
-	result := r.DB.Where("username = ?", username).Offset(offset).Limit(limit).Find(&notif)
+	result := r.DB.Where("pic = ?", username).Offset(offset).Limit(limit).Find(&notif)
 
 	if result.Error != nil {
 		return nil, result.Error
