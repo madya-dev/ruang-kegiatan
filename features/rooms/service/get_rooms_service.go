@@ -28,7 +28,7 @@ func (s *RoomServiceImpl) GetAllRooms(ctx echo.Context) ([]model.Room, int, erro
 		return nil, total, fmt.Errorf("Internal Server Error")
 	}
 	if len(search) > 0 && total <= 0 {
-		return nil, total, fmt.Errorf("room not found")
+		return nil, total, fmt.Errorf("Rooms not found")
 	}
 	return rooms, total, nil
 }
