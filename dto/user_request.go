@@ -10,10 +10,11 @@ type UserCreateRequest struct {
 }
 
 type UserUpdateRequest struct {
-	Username     string `json:"username" validate:"required,min=1,max=20"`
-	FullName     string `json:"fullname" validate:"required,min=1,max=255"`
-	StudyProgram string `json:"study_program" validate:"required,min=1,max=100"`
-	Phone        string `json:"phone" validate:"required,min=1,max=15"`
+	Username          string `json:"username" validate:"required,min=1,max=20"`
+	FullName          string `json:"fullname" validate:"required,min=1,max=255"`
+	StudyProgram      string `json:"study_program" validate:"required,min=1,max=100"`
+	Phone             string `json:"phone" validate:"required,min=1,max=15"`
+	RegistrationToken string `json:"registration_token"`
 }
 
 type UserRoleUpdateRequest struct {

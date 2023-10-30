@@ -7,11 +7,12 @@ import (
 
 func UserCreateRequestToUserModel(r dto.UserCreateRequest) *model.User {
 	return &model.User{
-		FullName:     r.FullName,
-		Username:     r.Username,
-		Password:     r.Password,
-		StudyProgram: r.StudyProgram,
-		Phone:        r.Phone,
+		FullName:          r.FullName,
+		Username:          r.Username,
+		Password:          r.Password,
+		StudyProgram:      r.StudyProgram,
+		Phone:             r.Phone,
+		RegistrationToken: r.RegistrationToken,
 	}
 }
 
@@ -24,10 +25,11 @@ func UserLoginRequestToUserModel(r dto.UserLoginRequest) *model.User {
 
 func UserUpdateRequestToUserModel(r dto.UserUpdateRequest) *model.User {
 	return &model.User{
-		FullName:     r.FullName,
-		Username:     r.Username,
-		StudyProgram: r.StudyProgram,
-		Phone:        r.Phone,
+		FullName:          r.FullName,
+		Username:          r.Username,
+		StudyProgram:      r.StudyProgram,
+		Phone:             r.Phone,
+		RegistrationToken: r.RegistrationToken,
 	}
 }
 func UserRoleUpdateRequestToUserModel(r dto.UserRoleUpdateRequest) *model.User {
