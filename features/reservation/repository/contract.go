@@ -9,7 +9,7 @@ import (
 )
 
 type ReservationRepository interface {
-	GetAllReservation(offset int, limit int, search string) ([]dto.ReservationResponse, int, error)
+	GetAllReservation(offset int, limit int, search string, start_date string, end_date string) ([]dto.ReservationResponse, int, error)
 	CheckReservation(id int) (*dto.ReservationCheck, error)
 	CreateReservation(reservation *model.Reservation) error
 	IsAvaible(roomID int64, startTime time.Time, endTime time.Time) (*model.Reservation, string, error)
