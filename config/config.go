@@ -19,6 +19,8 @@ type Config struct {
 	S3SecretKey     string
 	S3Region        string
 	FirebaseAuthKey string
+	MongoUsername   string
+	MongoPassword   string
 }
 
 var config *Config
@@ -38,6 +40,8 @@ func InitConfig() *Config {
 		S3SecretKey:     os.Getenv("S3_ACCESS_KEY_SECRET"),
 		S3Region:        os.Getenv("S3_REGION"),
 		FirebaseAuthKey: os.Getenv("FIREBASE_AUTH_KEY"),
+		MongoUsername:   os.Getenv("MONGODB_USERNAME"),
+		MongoPassword:   os.Getenv("MONGODB_PASSWORD"),
 	}
 
 	if config.AppPort == "" {
@@ -61,6 +65,24 @@ func InitConfig() *Config {
 	}
 	if config.DBPassword == "" {
 		log.Panic("[Error] DB Password cant be empty")
+	}
+	if config.S3SAccessKey == "" {
+		log.Panic("[Error] S3 Access key cant be empty")
+	}
+	if config.S3SecretKey == "" {
+		log.Panic("[Error] S3 Secret key cant be empty")
+	}
+	if config.S3Region == "" {
+		log.Panic("[Error] S3 Region key cant be empty")
+	}
+	if config.FirebaseAuthKey == "" {
+		log.Panic("[Error] Firebase Auth key cant be empty")
+	}
+	if config.MongoUsername == "" {
+		log.Panic("[Error] Mongo Username key cant be empty")
+	}
+	if config.MongoPassword == "" {
+		log.Panic("[Error] Mongo Password key cant be empty")
 	}
 
 	return config
