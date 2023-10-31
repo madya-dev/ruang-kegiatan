@@ -7,12 +7,13 @@ import (
 )
 
 type MockReservationRepository struct {
-	GetAllReservationFunc func(offset int, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error)
-	CheckReservationFunc  func(id int) (*dto.ReservationCheck, error)
-	CreateReservationFunc func(reservation *model.Reservation) error
-	IsAvaibleFunc         func(roomID int64, startTime time.Time, endTime time.Time) (*model.Reservation, string, error)
-	UpdateReservationFunc func(reservation *model.Reservation, id int) error
-	DeleteReservationFunc func(id int) error
+	GetAllReservationFunc      func(offset int, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error)
+	CheckReservationFunc       func(id int) (*dto.ReservationCheck, error)
+	CreateReservationFunc      func(reservation *model.Reservation) (int, error)
+	IsAvaibleFunc              func(roomID int64, startTime time.Time, endTime time.Time) (*model.Reservation, string, error)
+	UpdateReservationFunc      func(reservation *model.Reservation, id int) error
+	DeleteReservationFunc      func(id int) error
+	InsertTrackReservationFunc func(id int)
 }
 
 func (m *MockReservationRepository) GetAllReservation(offset int, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error) {
@@ -23,7 +24,7 @@ func (m *MockReservationRepository) CheckReservation(id int) (*dto.ReservationCh
 	return m.CheckReservationFunc(id)
 }
 
-func (m *MockReservationRepository) CreateReservation(reservation *model.Reservation) error {
+func (m *MockReservationRepository) CreateReservation(reservation *model.Reservation) (int, error) {
 	return m.CreateReservationFunc(reservation)
 }
 
@@ -37,4 +38,6 @@ func (m *MockReservationRepository) UpdateReservation(reservation *model.Reserva
 
 func (m *MockReservationRepository) DeleteReservation(id int) error {
 	return m.DeleteReservationFunc(id)
+}
+func (m *MockReservationRepository) InsertTrackReservation(id int) {
 }

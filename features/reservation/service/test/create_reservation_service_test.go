@@ -34,8 +34,8 @@ func TestCreateReservation(t *testing.T) {
 			return nil, "", nil
 		}
 
-		reservationRepository.CreateReservationFunc = func(reservation *model.Reservation) error {
-			return nil
+		reservationRepository.CreateReservationFunc = func(reservation *model.Reservation) (int, error) {
+			return 0, nil
 		}
 
 		reservationService.ReservationRepository = reservationRepository

@@ -20,10 +20,11 @@ import (
 	"github.com/go-playground/validator"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"go.mongodb.org/mongo-driver/mongo"
 	"gorm.io/gorm"
 )
 
-func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate) error {
+func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate, mongo *mongo.Client) error {
 
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
@@ -42,7 +43,7 @@ func InitServer(config config.Config, db *gorm.DB, validate *validator.Validate)
 	notificationService := notificationServicePkg.NewNotificationService(notificationRepository, validate)
 	notificationHandler := notificationHandlerPkg.NewNotificationHandler(notificationService)
 
-	reservationRepository := resevationRepositoryPkg.NewReservationRepository(db)
+	reservationRepository := resevationRepositoryPkg.NewReservationRepository(db, mongo)
 	reservationService := reservationServicePkg.NewReservationService(reservationRepository, validate, notificationRepository)
 	reservationHandler := reservationHandlerPkg.NewReservationHanlder(reservationService)
 
