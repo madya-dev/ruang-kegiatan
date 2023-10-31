@@ -7,7 +7,7 @@ import (
 )
 
 type MockReservationRepository struct {
-	GetAllReservationFunc func(offset int, limit int, search string) ([]dto.ReservationResponse, int, error)
+	GetAllReservationFunc func(offset int, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error)
 	CheckReservationFunc  func(id int) (*dto.ReservationCheck, error)
 	CreateReservationFunc func(reservation *model.Reservation) error
 	IsAvaibleFunc         func(roomID int64, startTime time.Time, endTime time.Time) (*model.Reservation, string, error)
@@ -15,8 +15,8 @@ type MockReservationRepository struct {
 	DeleteReservationFunc func(id int) error
 }
 
-func (m *MockReservationRepository) GetAllReservation(offset int, limit int, search string) ([]dto.ReservationResponse, int, error) {
-	return m.GetAllReservationFunc(offset, limit, search)
+func (m *MockReservationRepository) GetAllReservation(offset int, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error) {
+	return m.GetAllReservationFunc(offset, limit, search, start_time, end_time)
 }
 
 func (m *MockReservationRepository) CheckReservation(id int) (*dto.ReservationCheck, error) {

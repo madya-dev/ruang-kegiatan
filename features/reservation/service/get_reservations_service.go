@@ -11,6 +11,9 @@ import (
 func (s *ReservationServiceImpl) GetAllReservation(ctx echo.Context) ([]dto.ReservationResponse, int, error) {
 	params := ctx.QueryParams()
 	search := params.Get("s")
+	start_time := params.Get("start_time")
+	end_time := params.Get("end_time")
+
 	limit, err := strconv.Atoi(params.Get("limit"))
 
 	if err != nil {
@@ -23,7 +26,7 @@ func (s *ReservationServiceImpl) GetAllReservation(ctx echo.Context) ([]dto.Rese
 		return nil, 0, fmt.Errorf("Params offset not valid")
 	}
 
-	reservations, total, err := s.ReservationRepository.GetAllReservation(offset, limit, search)
+	reservations, total, err := s.ReservationRepository.GetAllReservation(offset, limit, search, start_time, end_time)
 	if err != nil {
 		return nil, total, fmt.Errorf("Internal Server Error")
 	}
