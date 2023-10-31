@@ -23,7 +23,7 @@ func TestGetAllReservation(t *testing.T) {
 	c := e.NewContext(req, rec)
 
 	t.Run("ValidQueryParametersWithData", func(t *testing.T) {
-		reservationRepository.GetAllReservationFunc = func(offset, limit int, search string) ([]dto.ReservationResponse, int, error) {
+		reservationRepository.GetAllReservationFunc = func(offset, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error) {
 			return []dto.ReservationResponse{
 				{ID: 1, RoomName: "Reservation 1"},
 				{ID: 2, RoomName: "Reservation 2"},
@@ -53,7 +53,7 @@ func TestGetAllReservation(t *testing.T) {
 	})
 
 	t.Run("InternalServerError", func(t *testing.T) {
-		reservationRepository.GetAllReservationFunc = func(offset, limit int, search string) ([]dto.ReservationResponse, int, error) {
+		reservationRepository.GetAllReservationFunc = func(offset, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error) {
 			return nil, 0, fmt.Errorf("Internal Server Error")
 		}
 
@@ -68,7 +68,7 @@ func TestGetAllReservation(t *testing.T) {
 	})
 
 	t.Run("NoReservationsFound", func(t *testing.T) {
-		reservationRepository.GetAllReservationFunc = func(offset, limit int, search string) ([]dto.ReservationResponse, int, error) {
+		reservationRepository.GetAllReservationFunc = func(offset, limit int, search string, start_time string, end_time string) ([]dto.ReservationResponse, int, error) {
 			return []dto.ReservationResponse{}, 0, nil
 		}
 
