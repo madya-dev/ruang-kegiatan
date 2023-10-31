@@ -67,8 +67,9 @@ func (s *ReservationServiceImpl) UpdateReservation(ctx echo.Context, r dto.Reser
 		firebase.SendNotification(registrationToken, notification.Title, notification.Message)
 	}
 
-	notif := helper.NotificationCreateRequestToNotificationModel(notification)
+	s.ReservationRepository.InsertTrackReservation(id)
 
+	notif := helper.NotificationCreateRequestToNotificationModel(notification)
 	_ = s.NotificationRepository.CreateNotification(notif)
 
 	return nil

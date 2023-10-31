@@ -31,10 +31,13 @@ func (s *ReservationServiceImpl) CreateReservation(ctx echo.Context, r dto.Reser
 
 	reservation := helper.ReservationRequestToReservationModel(r, docsUrl, pic)
 
-	err = s.ReservationRepository.CreateReservation(reservation)
+	reservationID, err := s.ReservationRepository.CreateReservation(reservation)
 
 	if err != nil {
 		return fmt.Errorf("Error when creating reservation: %s", err.Error())
 	}
+
+	s.ReservationRepository.InsertTrackReservation(reservationID)
+
 	return nil
 }
