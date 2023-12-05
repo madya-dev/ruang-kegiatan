@@ -4,7 +4,7 @@
 
 ---
 
-## Minimum Viable Product (MVP)
+## Minimum Viable Product
 
 MVP Docs : https://docs.google.com/document/d/1AyARRqCesFTAY93Sm9DQsYowHhDR9PaZNY6Cioqr5FM/edit?usp=sharing
 
